@@ -29,6 +29,13 @@ public class conn {
         System.out.println("Таблица создана или уже существует.");
     }
 
+    // --------Заполнение таблицы--------
+    public static void insert_type (String s) throws SQLException
+    {
+        statmt.execute("INSERT INTO 'types' ('type') VALUES ('" + s + "'); ");
+
+        System.out.println("Записано в таблицу types = " + s);
+    }
 
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
