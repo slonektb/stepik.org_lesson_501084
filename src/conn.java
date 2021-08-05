@@ -345,4 +345,23 @@ public class conn {
         System.out.println("Соединения закрыты");
     }
 
+    //-------Удвление одной записи из таблицы cats------
+    public static void delete_cat(int id) throws SQLException{
+        statmt.execute("DELETE FROM 'cats' WHERE id = " + id + "; ");
+
+        System.out.println("Запись с id " + id + " удалена из таблицы cats");
+    }
+    public static void delete_cat(String where) throws SQLException{
+        statmt.execute("DELETE FROM 'cats' WHERE " + where + "; ");
+
+        System.out.println("Запись из таблицы cats удалена с уловием " + where);
+    }
+
+    //-------Обновление одной записи в таблице cats------
+    public static void update_cat(int id, String set, String where) throws SQLException{
+        statmt.execute("UPDATE 'cats' SET " + set + " WHERE id = " + id + " OR " + where +"; ");
+
+        System.out.println("Запись с id " + id + " и условиями " + where + " обновлена в таблице cats на значение " + set);
+    }
+
 }
