@@ -92,7 +92,7 @@ public class conn {
         System.out.println("Таблица создана или уже существует.");
     }
 
-    // --------Заполнение таблицы--------
+    // --------Вставка одной записи в таблицу types--------
     public static void insert_type (String s) throws SQLException
     {
         statmt.execute("INSERT INTO 'types' ('type') VALUES ('" + s + "'); ");
@@ -100,6 +100,7 @@ public class conn {
         System.out.println("Записано в таблицу types = " + s);
     }
 
+    // --------Заполнение таблицы всеми типами пород кошек---------------
     public static void add_all_types() throws SQLException{
 
         for (int i = 0;i < types.length;i++) {
@@ -107,6 +108,21 @@ public class conn {
         }
         System.out.println("Все породы добавлены в таблицу");
     }
+
+    //-------Удвление одной записи из таблицы types------
+    public static void delete_type(int id) throws SQLException{
+        statmt.execute("DELETE FROM 'types' WHERE id = " + id + "; ");
+
+        System.out.println("Запись с id " + id + " удалена из таблицы types");
+    }
+
+    //-------Обновление одной записи в таблице types------
+    public static void update_type(int id, String new_type) throws SQLException{
+        statmt.execute("UPDATE 'types' SET 'type' = '" + new_type + "' WHERE id = " + id + "; ");
+
+        System.out.println("Запись с id " + id + " обновлена в таблице types на значение " + new_type);
+    }
+
 
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
