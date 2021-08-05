@@ -364,4 +364,49 @@ public class conn {
         System.out.println("Запись с id " + id + " и условиями " + where + " обновлена в таблице cats на значение " + set);
     }
 
+    //------------Получить тип породы по id-----------
+    public static void get_cat(int i) throws ClassNotFoundException, SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM cats WHERE id = " + i);
+
+        int id = resSet.getInt("id");
+        String  name = resSet.getString("name");
+        System.out.print( "ID = " + id + "; ");
+        System.out.println( "Имя = " + name );
+        System.out.println();
+        System.out.println("Запись из таблицы cats выведена");
+        System.out.println();
+    }
+
+    //------------Получить тип породы по условию------
+    public static void get_cat_where(String where) throws ClassNotFoundException, SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM cats WHERE " + where);
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String  name = resSet.getString("name");
+            System.out.print( "ID = " + id + "; ");
+            System.out.println( "Name = " + name );
+        }
+        System.out.println();
+        System.out.println("Записи из таблицы cats, по условию '" + where + "' выведены");
+        System.out.println();
+    }
+
+    //------------Получить список всех пород----------
+    public static void get_all_cats() throws ClassNotFoundException, SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM cats");
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String  name = resSet.getString("type");
+            System.out.print( "ID = " + id + "; ");
+            System.out.println( "name = " + name );
+        }
+        System.out.println();
+        System.out.println("Таблица cats выведена");
+        System.out.println();
+    }
+
 }

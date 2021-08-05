@@ -19,9 +19,13 @@ public class db {
 //        conn.insert_cat("Мурло","Русская голубая кошка",5,5.0); //type_id = 48
 //        conn.insert_cat("Кокс","Черный демон",3,4.5);
 //        conn.add_more_cats(5000);
-        conn.delete_cat(5);
-        conn.delete_cat("name = 'Сингапурская кошка'");
-        conn.update_cat(4,"'name' = 'Марфа'","'name' = 'Чаузи'");
+//        conn.delete_cat(5);
+//        conn.delete_cat("name = 'Сингапурская кошка'");
+//        conn.update_cat(4,"'name' = 'Марфа'","'name' = 'Чаузи'");
+        conn.get_cat(64);
+        conn.get_cat_where("id < 15");
+        conn.get_cat_where("name LIKE 'Ма%'");
+        conn.get_all_cats();
 
         conn.CloseDB();
     }
