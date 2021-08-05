@@ -178,6 +178,33 @@ public class conn {
         System.out.println();
     }
 
+    //--------Добавление котиков в базу---------
+    public static void insert_cat(String name, String s, int age, Double weight) throws ClassNotFoundException, SQLException{
+        // Выполняем проверку на сущещствование породы в базе
+        resSet = statmt.executeQuery("SELECT * FROM types WHERE type = '" + s+ "'");
+        boolean empty = true;
+        int id_type = 0;
+        while( resSet.next() ) {
+            // Если resSet не пустой, то возвращаем лож
+            empty = false;
+            id_type = resSet.getInt("id");
+
+        }
+
+        if( empty ) {
+            // resSet оказался пустым, записываем новый тип породы в базу
+            statmt.execute("INSERT INTO 'types' ('type') VALUES ('" + s + "'); ");
+            resSet = statmt.executeQuery("SELECT last_insert_rowid()");
+
+            id_type = resSet.getInt(1);
+        }
+        // Записываем нового котика в базу
+        statmt.execute("INSERT INTO 'cats' ('name','type_id','age','weight') VALUES ('" + name + "', " + id_type + ", " + age + "," + weight + "); ");
+        System.out.println("Котик " + name + " добавлен в базу");
+
+    }
+
+
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
     {
