@@ -123,13 +123,57 @@ public class conn {
         System.out.println("Запись с id " + id + " обновлена в таблице types на значение " + new_type);
     }
 
+    //------------Получить тип породы по id-----------
+    public static void get_type(int i) throws ClassNotFoundException, SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM types WHERE id = " + i);
+
+        int id = resSet.getInt("id");
+        String  type = resSet.getString("type");
+        System.out.print( "ID = " + id + "; ");
+        System.out.println( "тип = " + type );
+        System.out.println();
+        System.out.println("Запись из таблицы types выведена");
+        System.out.println();
+    }
+
+    //------------Получить тип породы по условию------
+    public static void get_type_where(String where) throws ClassNotFoundException, SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM types WHERE " + where);
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String  type = resSet.getString("type");
+            System.out.print( "ID = " + id + "; ");
+            System.out.println( "тип = " + type );
+        }
+        System.out.println();
+        System.out.println("Записи из таблицы types, по условию '" + where + "' выведены");
+        System.out.println();
+    }
+
+    //------------Получить список всех пород----------
+    public static void get_all_types() throws ClassNotFoundException, SQLException{
+        resSet = statmt.executeQuery("SELECT * FROM types");
+
+        while(resSet.next())
+        {
+            int id = resSet.getInt("id");
+            String  type = resSet.getString("type");
+            System.out.print( "ID = " + id + "; ");
+            System.out.println( "тип = " + type );
+        }
+        System.out.println();
+        System.out.println("Таблица types выведена");
+        System.out.println();
+    }
 
     // --------Закрытие--------
     public static void CloseDB() throws ClassNotFoundException, SQLException
     {
         conn.close();
         statmt.close();
- //       resSet.close();
+        resSet.close();
 
         System.out.println("Соединения закрыты");
     }
