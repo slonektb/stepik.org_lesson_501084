@@ -83,13 +83,23 @@ public class conn {
         System.out.println("База Подключена!");
     }
 
-    // --------Создание таблицы--------
+    // --------Создание таблиц--------
     public static void CreateDB() throws ClassNotFoundException, SQLException
     {
         statmt = conn.createStatement();
         statmt.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' VARCHAR(100) NOT NULL);");
 
-        System.out.println("Таблица создана или уже существует.");
+        System.out.println("Таблица types создана или уже существует.");
+
+        statmt.execute("CREATE TABLE if not exists 'cats' " +
+                                "('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
+                                "'name' VARCHAR(20) NOT NULL," +
+                                "'type_id' INTEGER REFERENCES types (id) NOT NULL," +
+                                "'age' INTEGER NOT NULL," +
+                                "'weight' DOUBLE);");
+
+        System.out.println("Таблица cats создана или уже существует.");
+
     }
 
     // --------Вставка одной записи в таблицу types--------
